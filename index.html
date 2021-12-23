@@ -1,29 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>videojs-persist Demo</title>
-  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
-  
-</head>
-<body>
-  <video id="videojs-persist-player" class="video-js vjs-default-skin" controls>
-    <source src="//vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-    <source src="//vjs.zencdn.net/v/oceans.webm" type='video/webm'>
-  </video>
-  <ul>
-    <li><a href="/test/debug.html">Run unit tests in browser.</a></li>
-    <li><a href="docs/api/">Read generated docs.</a></li>
-  </ul>
-  <script src="node_modules/video.js/dist/video.js"></script>
-  <script src="dist/videojs-persist.js"></script>
-  <script>
-    (function(window, videojs) {
-      var examplePlayer = window.examplePlayer = videojs('videojs-persist-player', {
-        playbackRates: [1, 2]
-      });
-      var persist = window.persist = examplePlayer.persist({muted: false});
-    }(window, window.videojs));
-  </script>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<title>videojs-persist Demo</title>
+		<link href="node_modules/video.js/dist/video-js.css" rel="stylesheet" />
+	</head>
+	<body>
+		<video id="videojs-persist-player" class="video-js vjs-default-skin vjs-fluid" controls>
+			<source src="test-video/tears_of_steel_-_4k_version_in_hd_-_blender_foundation_channel_356p_24fps_vp9-128kbit_opus.webm" type="video/webm" />
+			<track kind="captions" src="test-video/TOS-de.vtt" srclang="de" label="Deutsch" />
+			<track kind="captions" src="test-video/TOS-en.vtt" srclang="en" label="English" />
+			<track kind="captions" src="test-video/TOS-es.vtt" srclang="es" label="Español" />
+			<track kind="captions" src="test-video/TOS-fr.vtt" srclang="fr" label="Français" />
+			<track kind="captions" src="test-video/TOS-it.vtt" srclang="it" label="Italiano" />
+			<track kind="captions" src="test-video/TOS-nl.vtt" srclang="nl" label="Nederlands" />
+			<track kind="captions" src="test-video/TOS-no.vtt" srclang="no" label="Norsk" />
+			<track kind="captions" src="test-video/TOS-ru.vtt" srclang="ru" label="Russian" />
+		</video>
+		<ul>
+			<li><a href="/test/debug.html">Run unit tests in browser.</a></li>
+			<li><a href="docs/api/">Read generated docs.</a></li>
+		</ul>
+		<script src="node_modules/video.js/dist/video.js"></script>
+		<script src="dist/videojs-persist.js"></script>
+		<script>
+			(function (window, videojs) {
+				var examplePlayer = (window.examplePlayer = videojs('videojs-persist-player', {
+					playbackRates: [1, 2]
+				}));
+				var persist = (window.persist = examplePlayer.persist({
+					muted: true,
+					playbackRate: true,
+					volume: true,
+					captions: true,
+					restoreUnsupportedRate: false,
+					key: 'videojs-persist'
+				}));
+				examplePlayer.one('play', function () {
+					console.log('PLAYER VALUES:');
+					console.log('  volume:', examplePlayer.volume());
+					console.log('  muted:', examplePlayer.muted());
+					console.log('  playbackRate:', examplePlayer.playbackRate(), '\n\n');
+					console.log('LOCAL STORAGE VALUES:');
+					console.table(JSON.parse(window.localStorage.getItem('videojs-persist')));
+				});
+			})(window, window.videojs);
+		</script>
+	</body>
 </html>
