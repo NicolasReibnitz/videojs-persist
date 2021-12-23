@@ -1,6 +1,6 @@
 {
 	"name": "@das.laboratory/videojs-persist",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Perists volume, captions and playback rate to local storage",
 	"license": "MIT",
 	"author": "mister-ben <git@misterben.me>",
