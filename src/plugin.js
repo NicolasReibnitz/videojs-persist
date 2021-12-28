@@ -83,16 +83,23 @@ const onPlayerReady = (player, options) => {
 		player.on('texttrackchange', () => {
 			// Get all text tracks for the current player.
 			const tracks = player.textTracks();
+			let language = '';
 
 			for (let i = 0; i < tracks.length; i++) {
 				const track = tracks[i];
 
 				// Find the current captions track and save it's language.
 				if (track.mode === 'showing') {
-					data.captions = track.language;
-					window.localStorage.setItem(options.key, JSON.stringify(data));
+					language = track.language;
 				}
 			}
+			if (language) {
+				data.captions = language;
+			} else {
+				data.captions = '';
+			}
+
+			window.localStorage.setItem(options.key, JSON.stringify(data));
 		});
 	}
 

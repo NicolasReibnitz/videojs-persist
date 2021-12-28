@@ -25,10 +25,10 @@
 		<script src="dist/videojs-persist.js"></script>
 		<script>
 			(function (window, videojs) {
-				var examplePlayer = (window.examplePlayer = videojs('videojs-persist-player', {
+				var player = (window.player = videojs('videojs-persist-player', {
 					playbackRates: [1, 2]
 				}));
-				var persist = (window.persist = examplePlayer.persist({
+				var persist = (window.persist = player.persist({
 					muted: true,
 					playbackRate: true,
 					volume: true,
@@ -36,11 +36,11 @@
 					restoreUnsupportedRate: false,
 					key: 'videojs-persist'
 				}));
-				examplePlayer.one('play', function () {
+				player.one('play', function () {
 					console.log('PLAYER VALUES:');
-					console.log('  volume:', examplePlayer.volume());
-					console.log('  muted:', examplePlayer.muted());
-					console.log('  playbackRate:', examplePlayer.playbackRate(), '\n\n');
+					console.log('  volume:', player.volume());
+					console.log('  muted:', player.muted());
+					console.log('  playbackRate:', player.playbackRate(), '\n\n');
 					console.log('LOCAL STORAGE VALUES:');
 					console.table(JSON.parse(window.localStorage.getItem('videojs-persist')));
 				});
