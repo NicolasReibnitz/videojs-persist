@@ -68,7 +68,7 @@ const onPlayerReady = (player, options) => {
 					const track = tracks[i];
 
 					// Find the right captions track and mark it as "showing".
-					if (track.kind === 'captions' && track.language === val) {
+          if ((track.kind === 'captions' || track.kind === 'subtitles') && track.language === val) {
 						track.mode = 'showing';
 					}
 				}
